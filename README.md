@@ -73,5 +73,5 @@ To show a integration via the API, i followed a exemple from https://www.elastic
 Queries can be defined into a index. It is called a view.
 ![ScreenShot](img/discover_view.png)
 
-A view can be saved as a part of a custom created dashboard.
-![ScreenShot](img/custom_dashboard-nodejs_ingests.png)
+A view can be saved as a part of a custom created dashboard. This dashboard is composed by three lenses (graphs).<br>Donut for witch host served the app, and other for then the app vas accessed.
+![ScreenShot](img/custom_dashboard.png)
