@@ -57,9 +57,57 @@ Steps are OK, wee seen various logs and metrics about eh cluster.
 
 ## TASK 2-2 : Setup Kibana to exploit data from custom application via the ElasticSearch API.
 
-1. Data from a demo NODEJS app.
+1. Data from a demo dockerized NODEJS app.
 
 I wrot a simple demo app who send some temporal datas to my ElasticSearch deployment each time à refresh the page. So i can now draw a usage graph of the app.
+
+<br>
+
+Build docker image tagged with my DOCKER HUB account.
+
+```
+% docker build -t themaire/nodejs_2_elastic:latest -f dockerfile .
+```
+And I pushed it on DOCKER HUB.
+
+```
+% docker push themaire/nodejs_2_elastic:latest            
+The push refers to repository [docker.io/themaire/nodejs_2_elastic]
+1350b6812bb5: Pushed 
+7db0b2c82717: Pushed 
+375ec72b8601: Pushed 
+3d43c1e0b5ff: Pushed 
+a58f36acafc2: Pushed 
+29420cec4282: Pushed 
+6e510b7e8c2e: Pushed 
+ef90ba9637e5: Mounted from library/node 
+f551bcde2b16: Mounted from library/node 
+a3170bd49e86: Mounted from library/node 
+ad7578bb6cf2: Mounted from library/node 
+9b9249a811e2: Mounted from library/node 
+1a9054bc9c56: Mounted from library/node 
+81639bbe8504: Mounted from library/node 
+42f253cd68b4: Mounted from library/node 
+latest: digest: sha256:fecd9430e62339ea66cb4811356695d549e9d5da60b39dc2c3bc239095067062 size: 3463
+```
+<br><br>
+
+# Deployment
+<p>Works only when our AWS EKS Kubernetes cluster is up (see how : https://github.com/themaire/ecf_eks_terraform/). We can now deploy the app on the cluster.</p>
+
+Now, it is time to apply the Terrafom main.tf file for the deployment. The secrets must be stored in separeted text files like this, one environment variable by text file:
+
+```
+% mkdir ./secrets \
+echo -n 'hello_prof3ssor!' > ./secrets/CLOUDID.txt \ 
+echo -n 'studi_work_hard' > ./secrets/USERNAME.txt \
+echo -n 'Devops_is_cool' > ./secrets/PASSWORD.txt
+
+terraform init
+terraform plan # For prevew what will do
+terraform apply
+```
+
 
 <br><br>
 In the app, the full test date and the timestamp of the refreshed page is shown.
