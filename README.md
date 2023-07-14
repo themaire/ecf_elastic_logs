@@ -8,25 +8,28 @@ Included tasks :
 
 ## Introduction :
 <p>Works only when our AWS EKS Kubernetes cluster is up (see how : https://github.com/themaire/ecf_eks_terraform/).</p>
-<p>In DevOps practice, monitoring what is happening on our infrastructure is critical. For that, the couple of tools ElasticSearch (database) and Kibana (dashbord) will help us a lot to keep a eye on our Kubernetes cluster and a demo NodeJS app (for exemple).</p>
+<p>In DevOps practice, monitoring our infrastructure health is critical. For that, the couple of tools ElasticSearch (database) and Kibana (dashbord) will help us a lot to keep a eye on our Kubernetes cluster and a demo NodeJS app (for exemple) via various metrics and logs.</p>
 
 ### What I done :
 
 ## TASK 1-2 : Monitior a Kubernetes Cluster with ElasticSearch and Kibana
 
 I created a account on https://cloud.elastic.co (paid service but 14 days trial account). Then, i created a "deployment", it is a kind of server.<br>
-My "ECF_STUDI" is ready to store and serve datas.
+My "ECF_STUDI" deployment is ready to store and serve datas.
 ![ScreenShot](img/my_first_deployment.png)
 
 Once entered in the deployment, i spotted a invitation to monitor a Kubernetes Server. Lucky i am, great help given here.
 ![ScreenShot](img/invitation_to_monitor_kubernetes_after_deployment.png)
 
-The first thing to do is to inatall the Kubernetes integration (plugin) on our ElasticSearch server.
+The first thing to do is to install the Kubernetes integration (plugin) on our ElasticSearch server.
 ![ScreenShot](img/kub_integration_plugin.png)
 
-My Kubernetes cluster is opérate and hosted by AWS, so i am able to apply the yaml format manifest file provided. <br>
+My Kubernetes cluster is operate and hosted by AWS, so i am able to apply the yaml format manifest file provided. <br>
+
 It will deploy a POD who will send lot of cluster's logs. This is the <b>Elastic agent</b>.
 <br><br>
+
+
 Once deployed with the "kubectl apply -f ..." command, the page confirmed that Elastic agent is enrolled to ElasticSearch with success.
 
 ![ScreenShot](img/1_install-elastic-agent.png)
@@ -98,9 +101,12 @@ latest: digest: sha256:fecd9430e62339ea66cb4811356695d549e9d5da60b39dc2c3bc23909
 Now, it is time to apply the Terrafom main.tf file for the deployment. The secrets must be stored in separeted text files like this, one environment variable by text file:
 
 ```
+# SECRETS WILL BE SENT TO KUBERNETES
+# VIA A KUBECTL COMMANDE VIA TERRAFORM
+
 % mkdir ./secrets \
 echo -n 'hello_prof3ssor!' > ./secrets/CLOUDID.txt \ 
-echo -n 'studi_work_hard' > ./secrets/USERNAME.txt \
+echo -n 'noob_work_hard' > ./secrets/USERNAME.txt \
 echo -n 'Devops_is_cool' > ./secrets/PASSWORD.txt
 
 terraform init
