@@ -7,6 +7,7 @@ Included tasks :
 2. Mettez en place un kibana et connectez-le au élasticsearch. Montrez des exemples de recherches sur les logs (kibana queries).
 
 ## Introduction :
+<p>Works only when our AWS EKS Kubernetes cluster is up (see how : https://github.com/themaire/ecf_eks_terraform/).</p>
 <p>In DevOps practice, monitoring what is happening on our infrastructure is critical. For that, the couple of tools ElasticSearch (database) and Kibana (dashbord) will help us a lot to keep a eye on our Kubernetes cluster and a demo NodeJS app (for exemple).</p>
 
 ### What I done :
