@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 ## Install libraries
 RUN npm install express # Mini web server
 RUN npm install @elastic/elasticsearch # Lib
-RUN npm install config # for elastic authentification
 
 ADD index.js .
 
